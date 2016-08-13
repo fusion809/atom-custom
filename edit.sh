@@ -259,4 +259,7 @@ function install {
   sudo dpkg -i out/atom-${_atomver}-amd64.deb
   exit
 }
+
 prepare
+build
+install
