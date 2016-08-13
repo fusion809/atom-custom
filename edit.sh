@@ -238,8 +238,18 @@ function prepare {
          -e "/\"packageDependencies\": {/a \
               \"dark-bint-syntax\": \"${_dark_bint_syntax_ver}\",\n    \"fusion-ui\": \"${_fusion_ui_ver}\"," package.json
 
-  patch -Np1 $HOME/GitHub/mine/atom-custom/theme.patch
+  for i in ${L[@]}
+  do
+    unset ver
+    ver="$(git -C "$srcdir/$i" describe --tags `git -C "$srcdir/$i" rev-list --tags --max-count=1` | sed 's/v//g')"
+    sed -i -e "s/\"$i\": \".*\"/\"$i\": \"$ver\"/g" package.json
+  done
+
+  patch -Np1 -i $HOME/GitHub/mine/atom-custom/theme.patch
   exit
 }
 
+function build {
+  script/build
+}
 prepare
