@@ -112,6 +112,12 @@ function gitsources {
   else
     git -C dark-bint-syntax pull origin master
   fi
+  # file-icons
+  if ! [[ -d file-icons ]]; then
+    git clone https://github.com/DanBrooker/file-icons
+  else
+    git -C file-icons pull origin master
+  fi
   # fusion-ui
   if ! [[ -d fusion-ui ]]; then
     git clone ${_fus_url}/fusion-ui
@@ -205,6 +211,7 @@ function prepare {
   _atomver=$(describe atom)
   _about_arch_ver=$(describe about-arch)
   _dark_bint_syntax_ver=$(describe dark-bint-syntax)
+  _file_icons_ver=$(describe file-icons)
   _fusion_ui_ver=$(describe fusion-ui)
   _hyperclick_ver=$(describe hyperclick)
   _hyperlink_hyperclick_ver=$(describe hyperlink-hyperclick)
@@ -230,7 +237,7 @@ function prepare {
                      \"language-patch2\": \"${_language_patch2_url}\"," \
          -e "s/\"language-shellscript\": \".*\",/\"language-unix-shell\": \"${_language_unix_shell_ver}\",\n    \"language-vala-modern\": \"${_language_vala_modern_ver}\",\n    \"terminal-fusion\": \"${_terminal_fusion_ver}\",/g" \
          -e "s/\"about\": \".*\"/\"about-arch\": \"${_about_arch_ver}\"/g" \
-         -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",/g" \
+         -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"file-icons\": \"${_file_icons_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",/g" \
          -e "/\"packageDependencies\": {/a \
               \"dark-bint-syntax\": \"${_dark_bint_syntax_ver}\",\n    \"fusion-ui\": \"${_fusion_ui_ver}\"," package.json
 
