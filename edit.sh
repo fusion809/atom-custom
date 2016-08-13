@@ -124,6 +124,24 @@ function gitsources {
   else
     git -C fusion-ui pull origin master
   fi
+  # git-plus
+  if ! [[ -d git-plus ]]; then
+    git clone https://github.com/akonwi/git-plus
+  else
+    git -C git-plus pull origin master
+  fi
+  # git-time-machine
+  if ! [[ -d git-time-machine ]]; then
+    git clone https://github.com/littlebee/git-time-machine
+  else
+    git -C git-time-machine pull origin master
+  fi
+  # gpp-compiler
+  if ! [[ -d gpp-compiler ]]; then
+    git clone https://github.com/kriscross07/atom-gpp-compiler gpp-compiler
+  else
+    git -C gpp-compiler pull origin master
+  fi
   # language-gfm2
   if ! [[ -d language-gfm2 ]]; then
     git clone ${_fus_url}/language-gfm2
@@ -160,11 +178,22 @@ function gitsources {
   else
     git -C language-vala-modern pull origin master
   fi
+  if ! [[ -d language-viml ]]; then
+    git clone https://github.com/Alhadis/language-viml
+  else
+    git -C language-viml pull origin master
+  fi
   # terminal-fusion
   if ! [[ -d terminal-fusion ]]; then
     git clone ${_fus_url}/terminal-fusion
   else
     git -C terminal-fusion pull origin master
+  fi
+  # toolbar-fusion
+  if ! [[ -d toolbar-fusion ]]; then
+    git clone ${_fus_url}/toolbar-fusion
+  else
+    git -C toolbar-fusion pull origin master
   fi
   # minimap
   if ! [[ -d minimap ]]; then
@@ -177,6 +206,18 @@ function gitsources {
     git clone https://github.com/abe33/atom-pigments pigments
   else
     git -C pigments pull origin master
+  fi
+  # script
+  if ! [[ -d script ]]; then
+    git clone https://github.com/rgbkrk/atom-script script
+  else
+    git -C script pull origin master
+  fi
+  # tool-bar
+  if ! [[ -d tool-bar ]]; then
+    git clone https://github.com/suda/tool-bar
+  else
+    git -C tool-bar pull origin master
   fi
   # hyperclick
   if ! [[ -d hyperclick ]]; then
@@ -213,6 +254,9 @@ function prepare {
   _dark_bint_syntax_ver=$(describe dark-bint-syntax)
   _file_icons_ver=$(describe file-icons)
   _fusion_ui_ver=$(describe fusion-ui)
+  _git_plus_ver=$(describe git-plus)
+  _git_time_machine_ver=$(describe git-time-machine)
+  _gpp_compiler_ver=$(describe gpp-compiler)
   _hyperclick_ver=$(describe hyperclick)
   _hyperlink_hyperclick_ver=$(describe hyperlink-hyperclick)
   _language_gfm2_ver=$(describe language-gfm2)
@@ -221,9 +265,13 @@ function prepare {
   _language_patch2_ver=$(describe language-patch2)
   _language_unix_shell_ver=$(describe language-unix-shell)
   _language_vala_modern_ver=$(describe language-vala-modern)
+  _language_viml_ver=$(describe language-viml)
   _minimap_ver=$(describe minimap)
   _pigments_ver=$(describe pigments)
+  _script_ver=$(describe script)
   _terminal_fusion_ver=$(describe terminal-fusion)
+  _tool_bar_ver=$(describe tool-bar)
+  _toolbar_fusion_ver=$(describe toolbar-fusion)
 
   cd $srcdir/atom
   git checkout v${_atomver}
@@ -235,9 +283,9 @@ function prepare {
          -e "s/\"language-gfm\": \".*\",/\"language-gfm2\": \"${_language_gfm2_ver}\",\n    \"language-ini-desktop\": \"${_language_ini_desktop_ver}\",\n    \"language-liquid\": \"${_language_liquid_ver}\",\n    \"language-patch2\": \"${_language_patch2_ver}\",/g" \
          -e "/\"dependencies\": {/a \
                      \"language-patch2\": \"${_language_patch2_url}\"," \
-         -e "s/\"language-shellscript\": \".*\",/\"language-unix-shell\": \"${_language_unix_shell_ver}\",\n    \"language-vala-modern\": \"${_language_vala_modern_ver}\",\n    \"terminal-fusion\": \"${_terminal_fusion_ver}\",/g" \
+         -e "s/\"language-shellscript\": \".*\",/\"language-unix-shell\": \"${_language_unix_shell_ver}\",\n    \"language-vala-modern\": \"${_language_vala_modern_ver}\",\n    \"language-viml\": \"${_language_viml_ver}\",\n    \"terminal-fusion\": \"${_terminal_fusion_ver}\",\n    \"tool-bar\": \"${_tool_bar_ver}\",\n    \"toolbar-fusion\": \"${_toolbar_fusion_ver}\",/g" \
          -e "s/\"about\": \".*\"/\"about-arch\": \"${_about_arch_ver}\"/g" \
-         -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"file-icons\": \"${_file_icons_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",/g" \
+         -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"file-icons\": \"${_file_icons_ver}\",\n    \"git-plus\": \"${_git_plus_ver}\",\n    \"git-time-machine\": \"${_git_time_machine_ver}\",\n    \"gpp-compiler\": \"${_gpp_compiler_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",\n    \"script\": \"${_script_ver}\",/g" \
          -e "/\"packageDependencies\": {/a \
               \"dark-bint-syntax\": \"${_dark_bint_syntax_ver}\",\n    \"fusion-ui\": \"${_fusion_ui_ver}\"," package.json
 
