@@ -246,10 +246,19 @@ function prepare {
   done
 
   patch -Np1 -i $HOME/GitHub/mine/atom-custom/theme.patch
+  sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
+  ./script/build || die "Fail fixing verbosity of script/build"
   exit
 }
 
 function build {
   script/build
+  exit
+}
+
+function install {
+  script/grunt mkdeb
+  sudo dpkg -i out/atom-${_atomver}-amd64.deb
+  exit
 }
 prepare
