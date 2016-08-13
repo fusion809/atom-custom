@@ -84,10 +84,10 @@ _L=('archive-view'
 
 function gitatomsources {
   cd $srcdir
-  if ! [[ -d '$1' ]]; then
+  if ! [[ -d "$1" ]]; then
     git clone ${_atom_url}/$1
   else
-    git -C '$1' pull origin master
+    git -C "$1" pull origin master
   fi
   cd -
 }
@@ -195,7 +195,7 @@ function gitsources {
 }
 
 function describe {
-  if [[ "$1" == "atom" ]]; then
+  if ! [[ "$1" == "atom" ]]; then
     printf "$(git -C "$srcdir/$1" describe --tags `git -C "$srcdir/$1" rev-list --tags --max-count=1` | sed 's/v//g')"
   else
     printf "$(git -C "$srcdir/$1" describe --tags `git -C "$srcdir/$1" rev-list --tags --max-count=5` | sed 's/v//g' | grep -v "[a-z]")"
@@ -220,6 +220,8 @@ function prepare {
   _pigments_ver=$(describe pigments)
   _terminal_fusion_ver=$(describe terminal-fusion)
 
+  printf "_atomver is ${_atomver}\n _about_arch_ver is ${_about_arch_ver}\n _dark_bint_syntax_ver is ${_dark_bint_syntax_ver}\n _fusion_ui_ver is ${_fusion_ui_ver}\n _hyperclick_ver is ${_hyperclick_ver}\n _hyperlink_hyperclick_ver is ${_hyperlink_hyperclick_ver}\n _language_gfm2_ver is ${_language_gfm2_ver}\n _language_ini_desktop_ver is ${_language_ini_desktop_ver}\n _language_liquid_ver is ${_language_liquid_ver}\n _language_patch2_ver is ${_language_patch2_ver}\n _language_unix_shell_ver is ${_language_unix_shell_ver}\n _language_vala_modern_ver is ${_language_vala_modern_ver}\n _minimap_ver is ${_minimap_ver}\n _pigments_ver is ${_pigments_ver}\n _terminal_fusion_ver is ${_terminal_fusion_ver}"
+
   cd $srcdir/atom
   git checkout v${_atomver}
   sed -i -e "/exception-reporting/d" \
@@ -235,6 +237,9 @@ function prepare {
          -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",/g" \
          -e "/\"packageDependencies\": {/a \
               \"dark-bint-syntax\": \"${_dark_bint_syntax_ver}\",\n    \"fusion-ui\": \"${_fusion_ui_ver}\"," package.json
+
+  patch -Np1 $HOME/GitHub/mine/atom-custom/theme.patch
+  exit
 }
 
 prepare
