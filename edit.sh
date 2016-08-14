@@ -309,7 +309,7 @@ function build {
   exit
 }
 
-function install {
+function installatom {
   cd $srcdir/atom
   script/grunt mkdeb
   sudo dpkg -i out/atom-${_atomver}-amd64.deb
@@ -319,6 +319,4 @@ function install {
   exit
 }
 
-prepare
-build
-install
+prepare && build && installatom
