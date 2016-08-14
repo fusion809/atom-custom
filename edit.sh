@@ -299,6 +299,11 @@ function prepare {
 
   patch -Np1 -i $HOME/GitHub/mine/atom-custom/theme.patch
   patch -Np1 -i $HOME/GitHub/mine/atom-custom/desktop.patch
+
+  mkdir -p $srcdir/atom/node_modules
+  cd $srcdir/atom/node_modules
+  wget -cqO- https://github.com/fusion809/about/archive/v${_about_arch_ver}.tar.gz | tar xz --transform="s/about-${_about_arch_ver}/about-arch/"
+
   sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
   ./script/build || die "Fail fixing verbosity of script/build"
   sed -e "s/<%= version %>/$pkgver/g" $HOME/GitHub/mine/atom-custom/control.in > $srcdir/atom/resources/linux/debian/control.in
