@@ -5,6 +5,7 @@ _lee_url='https://github.com/lee-dohm'
 _mus_url='https://github.com/Murriouz'
 _language_liquid_url='https://github.com/puranjayjain/language-liquid'
 _language_patch2_url="${_fus_url}/language-patch2"
+GHUBM=$GHUBM
 url=${_atom_url}/atom
 srcdir=$HOME/atom-modules
 _L=('archive-view'
@@ -297,16 +298,18 @@ function prepare {
     sed -i -e "s/\"$i\": \".*\"/\"$i\": \"$ver\"/g" package.json
   done
 
-  patch -Np1 -i $HOME/GitHub/mine/atom-custom/theme.patch
-  patch -Np1 -i $HOME/GitHub/mine/atom-custom/desktop.patch
+  patch -Np1 -i $GHUBM/atom-custom/theme.patch
+  patch -Np1 -i $GHUBM/atom-custom/desktop.patch
 
   mkdir -p $srcdir/atom/node_modules
   cd $srcdir/atom/node_modules
   wget -cqO- https://github.com/fusion809/about/archive/v${_about_arch_ver}.tar.gz | tar xz --transform="s/about-${_about_arch_ver}/about-arch/"
+  cd about-arch
+  patch -Np1 -i $GHUBM/atom-custom/about-arch.patch
 
   sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
   ./script/build || die "Fail fixing verbosity of script/build"
-  sed -e "s/<%= version %>/$pkgver/g" $HOME/GitHub/mine/atom-custom/control.in > $srcdir/atom/resources/linux/debian/control.in
+  sed -e "s/<%= version %>/$pkgver/g" $GHUBM/atom-custom/control.in > $srcdir/atom/resources/linux/debian/control.in
   exit
 }
 
@@ -320,8 +323,8 @@ function installatom {
   cd $srcdir/atom
   script/grunt mkdeb
   sudo dpkg -i out/atom-${_atomver}-amd64.deb
-  cp out/atom-${_atomver}-amd64.deb $HOME/GitHub/mine/atom-custom
-  cd $HOME/GitHub/mine/atom-custom
+  cp out/atom-${_atomver}-amd64.deb $GHUBM/atom-custom
+  cd $GHUBM/atom-custom
   gothub upload -t v${_atomver} -n atom-${_atomver}-amd64.deb -f atom-${_atomver}-amd64.deb -R
   exit
 }
