@@ -324,10 +324,10 @@ function installatom {
   cd $srcdir/atom
   script/grunt mkdeb
   sudo dpkg -i out/atom-${_atomver}-amd64.deb
-  cp out/atom-${_atomver}-amd64.deb $GHUBM/atom-custom
+  cp out/atom-${_atomver}-amd64.deb $GHUBM/atom-custom/atom-bleeding-${pkgver}-amd64.deb
   cd $GHUBM/atom-custom
   gothub upload -t v${_atomver} -n atom-${_atomver}-amd64.deb -f atom-${_atomver}-amd64.deb -R
   exit
 }
 
-prepare && build && installatom
+prepare || build || installatom
