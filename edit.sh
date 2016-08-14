@@ -247,32 +247,33 @@ function describe {
   fi
 }
 
+_atomver=$(describe atom)
+_about_arch_ver=$(describe about-arch)
+_dark_bint_syntax_ver=$(describe dark-bint-syntax)
+_file_icons_ver=$(describe file-icons)
+_fusion_ui_ver=$(describe fusion-ui)
+_git_plus_ver=$(describe git-plus)
+_git_time_machine_ver=$(describe git-time-machine)
+_gpp_compiler_ver=$(describe gpp-compiler)
+_hyperclick_ver=$(describe hyperclick)
+_hyperlink_hyperclick_ver=$(describe hyperlink-hyperclick)
+_language_gfm2_ver=$(describe language-gfm2)
+_language_ini_desktop_ver=$(describe language-ini-desktop)
+_language_liquid_ver=$(describe language-liquid)
+_language_patch2_ver=$(describe language-patch2)
+_language_unix_shell_ver=$(describe language-unix-shell)
+_language_vala_modern_ver=$(describe language-vala-modern)
+_language_viml_ver=$(describe language-viml)
+_minimap_ver=$(describe minimap)
+_pigments_ver=$(describe pigments)
+_script_ver=$(describe script)
+_terminal_fusion_ver=$(describe terminal-fusion)
+_tool_bar_ver=$(describe tool-bar)
+_toolbar_fusion_ver=$(describe toolbar-fusion)
+pkgver="${_atomver}.aa${_about_arch_ver}.db${_dark_bint_syntax_ver}.fi${_file_icons_ver}.fu${_fusion_ui_ver}.gp${_git_plus_ver}.gtm${_git_time_machine_ver}.gc${_gpp_compiler_ver}.h${_hyperclick_ver}.hh${_hyperlink_hyperclick_ver}.lg${_language_gfm2_ver}.li${_language_ini_desktop_ver}.ll${_language_liquid_ver}.lp${_language_patch2_ver}.lu${_language_unix_shell_ver}.lv${_language_viml_ver}.lvm${_language_vala_modern_ver}.m${_minimap_ver}.p${_pigments_ver}.s${_script_ver}.tb${_tool_bar_ver}.tbf${_toolbar_fusion_ver}.tf${_terminal_fusion_ver}"
+
 function prepare {
   gitsources
-  _atomver=$(describe atom)
-  _about_arch_ver=$(describe about-arch)
-  _dark_bint_syntax_ver=$(describe dark-bint-syntax)
-  _file_icons_ver=$(describe file-icons)
-  _fusion_ui_ver=$(describe fusion-ui)
-  _git_plus_ver=$(describe git-plus)
-  _git_time_machine_ver=$(describe git-time-machine)
-  _gpp_compiler_ver=$(describe gpp-compiler)
-  _hyperclick_ver=$(describe hyperclick)
-  _hyperlink_hyperclick_ver=$(describe hyperlink-hyperclick)
-  _language_gfm2_ver=$(describe language-gfm2)
-  _language_ini_desktop_ver=$(describe language-ini-desktop)
-  _language_liquid_ver=$(describe language-liquid)
-  _language_patch2_ver=$(describe language-patch2)
-  _language_unix_shell_ver=$(describe language-unix-shell)
-  _language_vala_modern_ver=$(describe language-vala-modern)
-  _language_viml_ver=$(describe language-viml)
-  _minimap_ver=$(describe minimap)
-  _pigments_ver=$(describe pigments)
-  _script_ver=$(describe script)
-  _terminal_fusion_ver=$(describe terminal-fusion)
-  _tool_bar_ver=$(describe tool-bar)
-  _toolbar_fusion_ver=$(describe toolbar-fusion)
-
   cd $srcdir/atom
   git checkout v${_atomver}
   sed -i -e "/exception-reporting/d" \
@@ -300,6 +301,7 @@ function prepare {
   patch -Np1 -i $HOME/GitHub/mine/atom-custom/desktop.patch
   sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
   ./script/build || die "Fail fixing verbosity of script/build"
+  sed -e "s/<%= version %>/$pkgver/g" $HOME/GitHub/mine/atom-custom/control.in > $srcdir/atom/resources/linux/debian/control.in
   exit
 }
 
