@@ -306,6 +306,7 @@ function prepare {
   wget -cqO- https://github.com/fusion809/about/archive/v${_about_arch_ver}.tar.gz | tar xz --transform="s/about-${_about_arch_ver}/about-arch/"
   cd about-arch
   patch -Np1 -i $GHUBM/atom-custom/about-arch.patch
+  cd $srcdir/atom
 
   sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
   ./script/build || die "Fail fixing verbosity of script/build"
