@@ -313,6 +313,9 @@ function install {
   cd $srcdir/atom
   script/grunt mkdeb
   sudo dpkg -i out/atom-${_atomver}-amd64.deb
+  cp out/atom-${_atomver}-amd64.deb $HOME/GitHub/mine/atom-custom
+  cd $HOME/GitHub/mine/atom-custom
+  gothub upload -t v${_atomver} -n atom-${_atomver}-amd64.deb -f atom-${_atomver}-amd64.deb -R
   exit
 }
 
