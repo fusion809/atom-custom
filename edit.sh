@@ -326,7 +326,7 @@ function installatom {
   sudo dpkg -i out/atom-${_atomver}-amd64.deb
   cp out/atom-${_atomver}-amd64.deb $GHUBM/atom-custom/atom-bleeding-${pkgver}-amd64.deb
   cd $GHUBM/atom-custom
-  gothub upload -t v${_atomver} -n atom-${_atomver}-amd64.deb -f atom-${_atomver}-amd64.deb -R
+  gothub upload -t v${_atomver} -n *.deb -f *.deb
   exit
 }
 
