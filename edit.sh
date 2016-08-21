@@ -3,11 +3,14 @@ _atom_url='https://github.com/atom'
 _fus_url='https://github.com/fusion809'
 _lee_url='https://github.com/lee-dohm'
 _mus_url='https://github.com/Murriouz'
+_lint_url="https://github.com/AtomLinter"
 _language_liquid_url='https://github.com/puranjayjain/language-liquid'
 _language_patch2_url="${_fus_url}/language-patch2"
 GHUBM=$GHUBM
 url=${_atom_url}/atom
 srcdir=$HOME/atom-modules
+
+# Core bundled packages
 _L=('archive-view'
 'autocomplete-atom-api'
 'autocomplete-css'
@@ -232,6 +235,66 @@ function gitsources {
   else
     git -C hyperlink-hyperclick pull origin master
   fi
+  # autocomplete-clang
+  if ! [[ -d autocomplete-clang ]]; then
+    git clone https://github.com/yasuyuky/autocomplete-clang
+  else
+    git -C autocomplete-clang pull origin master
+  fi
+  # autocomplete-java
+  if ! [[ -d autocomplete-java ]]; then
+    git clone https://github.com/keskiju/autocomplete-java
+  else
+    git -C autocomplete-java pull origin master
+  fi
+  # autocomplete-modules
+  if ! [[ -d autocomplete-modules ]]; then
+    git clone https://github.com/nkt/atom-autocomplete-modules autocomplete-modules
+  else
+    git -C autocomplete-modules pull origin master
+  fi
+  # autocomplete-python
+  if ! [[ -d autocomplete-python ]]; then
+    git clone https://github.com/sadovnychyi/autocomplete-python
+  else
+    git -C autocomplete-python pull origin master
+  fi
+  # linter
+  if ! [[ -d linter ]]; then
+    git clone https://github.com/SteelBrain/linter
+  else
+    git -C linter pull origin master
+  fi
+  # linter-clang
+  if ! [[ -d linter-clang ]]; then
+    git clone ${_lint_url}/linter-clang
+  else
+    git -C linter-clang pull origin master
+  fi
+  # linter-coffeescript
+  if ! [[ -d linter-coffeescript ]]; then
+    git clone https://github.com/hokaccha/linter-coffeescript
+  else
+    git -C linter-coffeescript pull origin master
+  fi
+  # linter-jsonlint
+  if ! [[ -d linter-jsonlint ]]; then
+    git clone ${_lint_url}/linter-jsonlint
+  else
+    git -C linter-jsonlint pull origin master
+  fi
+  # linter-pylint
+  if ! [[ -d linter-pylint ]]; then
+    git clone ${_lint_url}/linter-pylint
+  else
+    git -C linter-pylint pull origin master
+  fi
+  # ask-stack
+  if ! [[ -d ask-stack ]]; then
+    git clone https://github.com/Chris911/Ask-Stack-Atom ask-stack
+  else
+    git -C ask-stack pull origin master
+  fi
   # run gitatomsources
   for i in ${_L[@]}
   do
@@ -248,8 +311,13 @@ function describe {
   fi
 }
 
+_ask_stack_ver="$(describe ask-stack)"
 _atomver=$(describe atom)
 _about_arch_ver=$(describe about-arch)
+_autocomplete_clang_ver="$(describe autocomplete-clang)"
+_autocomplete_java_ver="$(describe autocomplete-java)"
+_autocomplete_modules_ver="$(describe autocomplete-modules)"
+_autocomplete_python_ver="$(describe autocomplete-python)"
 _dark_bint_syntax_ver=$(describe dark-bint-syntax)
 _file_icons_ver=$(describe file-icons)
 _fusion_ui_ver=$(describe fusion-ui)
@@ -265,6 +333,11 @@ _language_patch2_ver=$(describe language-patch2)
 _language_unix_shell_ver=$(describe language-unix-shell)
 _language_vala_modern_ver=$(describe language-vala-modern)
 _language_viml_ver=$(describe language-viml)
+_linter_ver="$(describe linter)"
+_linter_clang_ver="$(describe linter-clang)"
+_linter_coffeescript_ver="$(describe linter-coffeescript)"
+_linter_jsonlint_ver="$(describe linter-jsonlint)"
+_linter_pylint_ver="$(describe linter-pylint)"
 _minimap_ver=$(describe minimap)
 _pigments_ver=$(describe pigments)
 _script_ver=$(describe script)
@@ -285,11 +358,11 @@ function prepare {
          -e "s/\"language-gfm\": \".*\",/\"language-gfm2\": \"${_language_gfm2_ver}\",\n    \"language-ini-desktop\": \"${_language_ini_desktop_ver}\",\n    \"language-liquid\": \"${_language_liquid_ver}\",\n    \"language-patch2\": \"${_language_patch2_ver}\",/g" \
          -e "/\"dependencies\": {/a \
                      \"language-patch2\": \"${_language_patch2_url}\"," \
-         -e "s/\"language-shellscript\": \".*\",/\"language-unix-shell\": \"${_language_unix_shell_ver}\",\n    \"language-vala-modern\": \"${_language_vala_modern_ver}\",\n    \"language-viml\": \"${_language_viml_ver}\",\n    \"terminal-fusion\": \"${_terminal_fusion_ver}\",\n    \"tool-bar\": \"${_tool_bar_ver}\",\n    \"toolbar-fusion\": \"${_toolbar_fusion_ver}\",/g" \
+         -e "s/\"language-shellscript\": \".*\",/\"language-unix-shell\": \"${_language_unix_shell_ver}\",\n    \"language-vala-modern\": \"${_language_vala_modern_ver}\",\n    \"language-archlinux\": \"${_language_archlinux_ver}\",\n    \"terminal-fusion\": \"${_terminal_fusion_ver}\",\n    \"tool-bar\": \"${_tool_bar_ver}\",\n    \"toolbar-fusion\": \"${_toolbar_fusion_ver}\",\n    \"linter-clang\": \"${_linter_clang_ver}\",\n    \"linter-coffeescript\": \"${_linter_coffeescript_ver}\",\n    \"linter-jsonlint\": \"${_linter_jsonlint_ver}\",\n    \"linter-pylint\": \"${_linter_pylint_ver}\",/g" \
          -e "s/\"about\": \".*\"/\"about-arch\": \"${_about_arch_ver}\"/g" \
-         -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"file-icons\": \"${_file_icons_ver}\",\n    \"git-plus\": \"${_git_plus_ver}\",\n    \"git-time-machine\": \"${_git_time_machine_ver}\",\n    \"gpp-compiler\": \"${_gpp_compiler_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",\n    \"script\": \"${_script_ver}\",/g" \
+         -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",/g" \
          -e "/\"packageDependencies\": {/a \
-              \"dark-bint-syntax\": \"${_dark_bint_syntax_ver}\",\n    \"fusion-ui\": \"${_fusion_ui_ver}\"," package.json
+              \"ask-stack\": \"${_ask_stack_ver}\",\n    \"autocomplete-clang\": \"${_autocomplete_clang_ver}\",\n    \"autocomplete-java\": \"${_autocomplete_java_ver}\",\n    \"autocomplete-modules\": \"${_autocomplete_modules_ver}\",\n    \"autocomplete-python\": \"${_autocomplete_python_ver}\",\n    \"autocomplete-sass\": \"${_autocomplete_sass_ver}\",\n    \"dark-bint-syntax\": \"${_dark_bint_syntax_ver}\",\n    \"file-icons\": \"${_file_icons_ver}\",\n    \"fusion-ui\": \"${_fusion_ui_ver}\",\n    \"gpp-compiler\": \"${_gpp_compiler_ver}\",\n    \"git-plus\": \"${_git_plus_ver}\",\n    \"git-time-machine\": \"${_git_time_machine_ver}\"," package.json
 
   for i in ${_L[@]}
   do
