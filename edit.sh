@@ -9,6 +9,9 @@ _language_patch2_url="${_fus_url}/language-patch2"
 GHUBM=$GHUBM
 url=${_atom_url}/atom
 srcdir=$HOME/atom-modules
+if ! [[ -d $srcdir ]]; then
+  mkdir -p $srcdir
+fi
 
 # Core bundled packages
 _L=('archive-view'
