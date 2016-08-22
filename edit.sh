@@ -311,40 +311,42 @@ function describe {
   fi
 }
 
-_ask_stack_ver="$(describe ask-stack)"
-_atomver=$(describe atom)
-_about_arch_ver=$(describe about-arch)
-_autocomplete_clang_ver="$(describe autocomplete-clang)"
-_autocomplete_java_ver="$(describe autocomplete-java)"
-_autocomplete_modules_ver="$(describe autocomplete-modules)"
-_autocomplete_python_ver="$(describe autocomplete-python)"
-_dark_bint_syntax_ver=$(describe dark-bint-syntax)
-_file_icons_ver=$(describe file-icons)
-_fusion_ui_ver=$(describe fusion-ui)
-_git_plus_ver=$(describe git-plus)
-_git_time_machine_ver=$(describe git-time-machine)
-_gpp_compiler_ver=$(describe gpp-compiler)
-_hyperclick_ver=$(describe hyperclick)
-_hyperlink_hyperclick_ver=$(describe hyperlink-hyperclick)
-_language_gfm2_ver=$(describe language-gfm2)
-_language_ini_desktop_ver=$(describe language-ini-desktop)
-_language_liquid_ver=$(describe language-liquid)
-_language_patch2_ver=$(describe language-patch2)
-_language_unix_shell_ver=$(describe language-unix-shell)
-_language_vala_modern_ver=$(describe language-vala-modern)
-_language_viml_ver=$(describe language-viml)
-_linter_ver="$(describe linter)"
-_linter_clang_ver="$(describe linter-clang)"
-_linter_coffeescript_ver="$(describe linter-coffeescript)"
-_linter_jsonlint_ver="$(describe linter-jsonlint)"
-_linter_pylint_ver="$(describe linter-pylint)"
-_minimap_ver=$(describe minimap)
-_pigments_ver=$(describe pigments)
-_script_ver=$(describe script)
-_terminal_fusion_ver=$(describe terminal-fusion)
-_tool_bar_ver=$(describe tool-bar)
-_toolbar_fusion_ver=$(describe toolbar-fusion)
-pkgver="${_atomver}.aa${_about_arch_ver}.db${_dark_bint_syntax_ver}.fi${_file_icons_ver}.fu${_fusion_ui_ver}.gp${_git_plus_ver}.gtm${_git_time_machine_ver}.gc${_gpp_compiler_ver}.h${_hyperclick_ver}.hh${_hyperlink_hyperclick_ver}.lg${_language_gfm2_ver}.li${_language_ini_desktop_ver}.ll${_language_liquid_ver}.lp${_language_patch2_ver}.lu${_language_unix_shell_ver}.lv${_language_viml_ver}.lvm${_language_vala_modern_ver}.m${_minimap_ver}.p${_pigments_ver}.s${_script_ver}.tb${_tool_bar_ver}.tbf${_toolbar_fusion_ver}.tf${_terminal_fusion_ver}"
+function pkgver {
+  _ask_stack_ver="$(describe ask-stack)"
+  _atomver=$(describe atom)
+  _about_arch_ver=$(describe about-arch)
+  _autocomplete_clang_ver="$(describe autocomplete-clang)"
+  _autocomplete_java_ver="$(describe autocomplete-java)"
+  _autocomplete_modules_ver="$(describe autocomplete-modules)"
+  _autocomplete_python_ver="$(describe autocomplete-python)"
+  _dark_bint_syntax_ver=$(describe dark-bint-syntax)
+  _file_icons_ver=$(describe file-icons)
+  _fusion_ui_ver=$(describe fusion-ui)
+  _git_plus_ver=$(describe git-plus)
+  _git_time_machine_ver=$(describe git-time-machine)
+  _gpp_compiler_ver=$(describe gpp-compiler)
+  _hyperclick_ver=$(describe hyperclick)
+  _hyperlink_hyperclick_ver=$(describe hyperlink-hyperclick)
+  _language_gfm2_ver=$(describe language-gfm2)
+  _language_ini_desktop_ver=$(describe language-ini-desktop)
+  _language_liquid_ver=$(describe language-liquid)
+  _language_patch2_ver=$(describe language-patch2)
+  _language_unix_shell_ver=$(describe language-unix-shell)
+  _language_vala_modern_ver=$(describe language-vala-modern)
+  _language_viml_ver=$(describe language-viml)
+  _linter_ver="$(describe linter)"
+  _linter_clang_ver="$(describe linter-clang)"
+  _linter_coffeescript_ver="$(describe linter-coffeescript)"
+  _linter_jsonlint_ver="$(describe linter-jsonlint)"
+  _linter_pylint_ver="$(describe linter-pylint)"
+  _minimap_ver=$(describe minimap)
+  _pigments_ver=$(describe pigments)
+  _script_ver=$(describe script)
+  _terminal_fusion_ver=$(describe terminal-fusion)
+  _tool_bar_ver=$(describe tool-bar)
+  _toolbar_fusion_ver=$(describe toolbar-fusion)
+  pkgver="${_atomver}.aa${_about_arch_ver}.db${_dark_bint_syntax_ver}.fi${_file_icons_ver}.fu${_fusion_ui_ver}.gp${_git_plus_ver}.gtm${_git_time_machine_ver}.gc${_gpp_compiler_ver}.h${_hyperclick_ver}.hh${_hyperlink_hyperclick_ver}.lg${_language_gfm2_ver}.li${_language_ini_desktop_ver}.ll${_language_liquid_ver}.lp${_language_patch2_ver}.lu${_language_unix_shell_ver}.lv${_language_viml_ver}.lvm${_language_vala_modern_ver}.m${_minimap_ver}.p${_pigments_ver}.s${_script_ver}.tb${_tool_bar_ver}.tbf${_toolbar_fusion_ver}.tf${_terminal_fusion_ver}"
+}
 
 function prepare {
   gitsources
@@ -403,4 +405,4 @@ function installatom {
   exit
 }
 
-prepare || build || installatom
+prepare; pkgver; build; installatom
