@@ -94,7 +94,7 @@ function gitatomsources {
   if ! [[ -d "$1" ]]; then
     git clone ${_atom_url}/$1
   else
-    git -C "$1" pull origin master
+    git -C "$1" pull --all
   fi
   cd -
 }
@@ -105,198 +105,198 @@ function gitsources {
   if ! [[ -d about-arch ]]; then
     git clone ${_fus_url}/about about-arch
   else
-    git -C about-arch pull origin master
+    git -C about-arch pull --all
   fi
   # atom
   if ! [[ -d atom ]]; then
     git clone $url
   else
-    git -C atom pull origin master
+    git -C atom pull --all
   fi
   # dark-bint-syntax
   if ! [[ -d dark-bint-syntax ]]; then
     git clone ${_mus_url}/dark-bint-syntax
   else
-    git -C dark-bint-syntax pull origin master
+    git -C dark-bint-syntax pull --all
   fi
   # file-icons
   if ! [[ -d file-icons ]]; then
     git clone https://github.com/DanBrooker/file-icons
   else
-    git -C file-icons pull origin master
+    git -C file-icons pull --all
   fi
   # fusion-ui
   if ! [[ -d fusion-ui ]]; then
     git clone ${_fus_url}/fusion-ui
   else
-    git -C fusion-ui pull origin master
+    git -C fusion-ui pull --all
   fi
   # git-plus
   if ! [[ -d git-plus ]]; then
     git clone https://github.com/akonwi/git-plus
   else
-    git -C git-plus pull origin master
+    git -C git-plus pull --all
   fi
   # git-time-machine
   if ! [[ -d git-time-machine ]]; then
     git clone https://github.com/littlebee/git-time-machine
   else
-    git -C git-time-machine pull origin master
+    git -C git-time-machine pull --all
   fi
   # gpp-compiler
   if ! [[ -d gpp-compiler ]]; then
     git clone https://github.com/kriscross07/atom-gpp-compiler gpp-compiler
   else
-    git -C gpp-compiler pull origin master
+    git -C gpp-compiler pull --all
   fi
   # language-gfm2
   if ! [[ -d language-gfm2 ]]; then
     git clone ${_fus_url}/language-gfm2
   else
-    git -C language-gfm2 pull origin master
+    git -C language-gfm2 pull --all
   fi
   # language-ini-desktop
   if ! [[ -d language-ini-desktop ]]; then
     git clone ${_fus_url}/language-ini-desktop
   else
-    git -C language-ini-desktop pull origin master
+    git -C language-ini-desktop pull --all
   fi
   # language-liquid
   if ! [[ -d language-liquid ]]; then
     git clone ${_language_liquid_url}
   else
-    git -C language-liquid pull origin master
+    git -C language-liquid pull --all
   fi
   # language-patch2
   if ! [[ -d language-patch2 ]]; then
     git clone ${_language_patch2_url}
   else
-    git -C language-patch2 pull origin master
+    git -C language-patch2 pull --all
   fi
   # language-unix-shell
   if ! [[ -d language-unix-shell ]]; then
     git clone ${_fus_url}/language-shellscript language-unix-shell
   else
-    git -C language-unix-shell pull origin master
+    git -C language-unix-shell pull --all
   fi
   # language-vala-modern
   if ! [[ -d language-vala-modern ]]; then
     git clone ${_fus_url}/language-vala-modern
   else
-    git -C language-vala-modern pull origin master
+    git -C language-vala-modern pull --all
   fi
   if ! [[ -d language-viml ]]; then
     git clone https://github.com/Alhadis/language-viml
   else
-    git -C language-viml pull origin master
+    git -C language-viml pull --all
   fi
   # terminal-fusion
   if ! [[ -d terminal-fusion ]]; then
     git clone ${_fus_url}/terminal-fusion
   else
-    git -C terminal-fusion pull origin master
+    git -C terminal-fusion pull --all
   fi
   # toolbar-fusion
   if ! [[ -d toolbar-fusion ]]; then
     git clone ${_fus_url}/toolbar-fusion
   else
-    git -C toolbar-fusion pull origin master
+    git -C toolbar-fusion pull --all
   fi
   # minimap
   if ! [[ -d minimap ]]; then
     git clone https://github.com/atom-minimap/minimap
   else
-    git -C minimap pull origin master
+    git -C minimap pull --all
   fi
   # pigments
   if ! [[ -d pigments ]]; then
     git clone https://github.com/abe33/atom-pigments pigments
   else
-    git -C pigments pull origin master
+    git -C pigments pull --all
   fi
   # script
   if ! [[ -d script ]]; then
     git clone https://github.com/rgbkrk/atom-script script
   else
-    git -C script pull origin master
+    git -C script pull --all
   fi
   # tool-bar
   if ! [[ -d tool-bar ]]; then
     git clone https://github.com/suda/tool-bar
   else
-    git -C tool-bar pull origin master
+    git -C tool-bar pull --all
   fi
   # hyperclick
   if ! [[ -d hyperclick ]]; then
     git clone https://github.com/facebooknuclideapm/hyperclick
   else
-    git -C hyperclick pull origin master
+    git -C hyperclick pull --all
   fi
   # hyperlink-hyperclick
   if ! [[ -d hyperlink-hyperclick ]]; then
     git clone https://github.com/UziTech/hyperlink-hyperclick
   else
-    git -C hyperlink-hyperclick pull origin master
+    git -C hyperlink-hyperclick pull --all
   fi
   # autocomplete-clang
   if ! [[ -d autocomplete-clang ]]; then
     git clone https://github.com/yasuyuky/autocomplete-clang
   else
-    git -C autocomplete-clang pull origin master
+    git -C autocomplete-clang pull --all
   fi
   # autocomplete-java
   if ! [[ -d autocomplete-java ]]; then
     git clone https://github.com/keskiju/autocomplete-java
   else
-    git -C autocomplete-java pull origin master
+    git -C autocomplete-java pull --all
   fi
   # autocomplete-modules
   if ! [[ -d autocomplete-modules ]]; then
     git clone https://github.com/nkt/atom-autocomplete-modules autocomplete-modules
   else
-    git -C autocomplete-modules pull origin master
+    git -C autocomplete-modules pull --all
   fi
   # autocomplete-python
   if ! [[ -d autocomplete-python ]]; then
     git clone https://github.com/sadovnychyi/autocomplete-python
   else
-    git -C autocomplete-python pull origin master
+    git -C autocomplete-python pull --all
   fi
   # linter
   if ! [[ -d linter ]]; then
     git clone https://github.com/SteelBrain/linter
   else
-    git -C linter pull origin master
+    git -C linter pull --all
   fi
   # linter-clang
   if ! [[ -d linter-clang ]]; then
     git clone ${_lint_url}/linter-clang
   else
-    git -C linter-clang pull origin master
+    git -C linter-clang pull --all
   fi
   # linter-coffeescript
   if ! [[ -d linter-coffeescript ]]; then
     git clone https://github.com/hokaccha/linter-coffeescript
   else
-    git -C linter-coffeescript pull origin master
+    git -C linter-coffeescript pull --all
   fi
   # linter-jsonlint
   if ! [[ -d linter-jsonlint ]]; then
     git clone ${_lint_url}/linter-jsonlint
   else
-    git -C linter-jsonlint pull origin master
+    git -C linter-jsonlint pull --all
   fi
   # linter-pylint
   if ! [[ -d linter-pylint ]]; then
     git clone ${_lint_url}/linter-pylint
   else
-    git -C linter-pylint pull origin master
+    git -C linter-pylint pull --all
   fi
   # ask-stack
   if ! [[ -d ask-stack ]]; then
     git clone https://github.com/Chris911/Ask-Stack-Atom ask-stack
   else
-    git -C ask-stack pull origin master
+    git -C ask-stack pull --all
   fi
   # run gitatomsources
   for i in ${_L[@]}
