@@ -310,13 +310,13 @@ function describe {
   if ! [[ "$1" == "atom" ]]; then
     printf "$(git -C "$srcdir/$1" describe --tags `git -C "$srcdir/$1" rev-list --tags --max-count=1` | sed 's/v//g')"
   else
-    printf "$(git -C "$srcdir/$1" describe --tags `git -C "$srcdir/$1" rev-list --tags --max-count=5` | sed 's/v//g' | grep -v "[a-z]")"
+    printf "$(git -C "$srcdir/$1" describe --tags `git -C "$srcdir/$1" rev-list --tags --max-count=10` | sed 's/v//g' | grep -v "[a-z]")"
   fi
 }
 
 function pkgver {
   _ask_stack_ver="$(describe ask-stack)"
-  _atomver=1.10.0
+  _atomver="$(describe atom)"
   _about_arch_ver="$(describe about-arch)"
   _autocomplete_clang_ver="$(describe autocomplete-clang)"
   _autocomplete_java_ver="$(describe autocomplete-java)"
@@ -330,7 +330,7 @@ function pkgver {
   _gpp_compiler_ver="$(describe gpp-compiler)"
   _hyperclick_ver="$(describe hyperclick)"
   _hyperlink_hyperclick_ver="$(describe hyperlink-hyperclick)"
-  _language_gfm2_ver=$(describe language-gfm2)
+  _language_gfm2_ver="$(describe language-gfm2)"
   _language_ini_desktop_ver=$(describe language-ini-desktop)
   _language_liquid_ver=$(describe language-liquid)
   _language_patch2_ver=$(describe language-patch2)
@@ -381,6 +381,9 @@ function prepare {
 
   mkdir -p $srcdir/atom/node_modules
   cd $srcdir/atom/node_modules
+  if ! [[ -n ${_about_arch_ver} ]]; then
+    _about_arch_ver=1.6.2
+  fi
   wget -cqO- https://github.com/fusion809/about/archive/v${_about_arch_ver}.tar.gz | tar xz --transform="s/about-${_about_arch_ver}/about-arch/"
   cd about-arch
   patch -Np1 -i $GHUBM/atom-custom/about-arch.patch
