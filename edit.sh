@@ -316,20 +316,20 @@ function describe {
 
 function pkgver {
   _ask_stack_ver="$(describe ask-stack)"
-  _atomver=$(describe atom)
-  _about_arch_ver=$(describe about-arch)
+  _atomver=1.10.0
+  _about_arch_ver="$(describe about-arch)"
   _autocomplete_clang_ver="$(describe autocomplete-clang)"
   _autocomplete_java_ver="$(describe autocomplete-java)"
   _autocomplete_modules_ver="$(describe autocomplete-modules)"
   _autocomplete_python_ver="$(describe autocomplete-python)"
-  _dark_bint_syntax_ver=$(describe dark-bint-syntax)
-  _file_icons_ver=$(describe file-icons)
-  _fusion_ui_ver=$(describe fusion-ui)
-  _git_plus_ver=$(describe git-plus)
-  _git_time_machine_ver=$(describe git-time-machine)
-  _gpp_compiler_ver=$(describe gpp-compiler)
-  _hyperclick_ver=$(describe hyperclick)
-  _hyperlink_hyperclick_ver=$(describe hyperlink-hyperclick)
+  _dark_bint_syntax_ver="$(describe dark-bint-syntax)"
+  _file_icons_ver="$(describe file-icons)"
+  _fusion_ui_ver="$(describe fusion-ui)"
+  _git_plus_ver="$(describe git-plus)"
+  _git_time_machine_ver="$(describe git-time-machine)"
+  _gpp_compiler_ver="$(describe gpp-compiler)"
+  _hyperclick_ver="$(describe hyperclick)"
+  _hyperlink_hyperclick_ver="$(describe hyperlink-hyperclick)"
   _language_gfm2_ver=$(describe language-gfm2)
   _language_ini_desktop_ver=$(describe language-ini-desktop)
   _language_liquid_ver=$(describe language-liquid)
