@@ -310,13 +310,13 @@ function describe {
   if ! [[ "$1" == "atom" ]]; then
     printf "$(git -C "$srcdir/$1" describe --tags `git -C "$srcdir/$1" rev-list --tags --max-count=1` | sed 's/v//g')"
   else
-    printf "$(git -C "$srcdir/$1" describe --tags `git -C "$srcdir/$1" rev-list --tags --max-count=5` | sed 's/v//g' | grep -v "[a-z]")"
+    printf "$(git -C "$srcdir/$1" describe --tags `git -C "$srcdir/$1" rev-list --tags --max-count=10` | sed 's/v//g' | grep -v "[a-z]")"
   fi
 }
 
 function pkgver {
   _ask_stack_ver="$(describe ask-stack)"
-  _atomver=1.10.0
+  _atomver="$(describe atom)"
   _about_arch_ver="$(describe about-arch)"
   _autocomplete_clang_ver="$(describe autocomplete-clang)"
   _autocomplete_java_ver="$(describe autocomplete-java)"
@@ -330,7 +330,7 @@ function pkgver {
   _gpp_compiler_ver="$(describe gpp-compiler)"
   _hyperclick_ver="$(describe hyperclick)"
   _hyperlink_hyperclick_ver="$(describe hyperlink-hyperclick)"
-  _language_gfm2_ver=$(describe language-gfm2)
+  _language_gfm2_ver="$(describe language-gfm2)"
   _language_ini_desktop_ver=$(describe language-ini-desktop)
   _language_liquid_ver=$(describe language-liquid)
   _language_patch2_ver=$(describe language-patch2)
@@ -353,6 +353,7 @@ function pkgver {
 
 function prepare {
   gitsources
+  pkgver
   cd $srcdir/atom
   git checkout v${_atomver}
   sed -i -e "/exception-reporting/d" \
@@ -363,11 +364,11 @@ function prepare {
          -e "s/\"language-gfm\": \".*\",/\"language-gfm2\": \"${_language_gfm2_ver}\",\n    \"language-ini-desktop\": \"${_language_ini_desktop_ver}\",\n    \"language-liquid\": \"${_language_liquid_ver}\",\n    \"language-patch2\": \"${_language_patch2_ver}\",/g" \
          -e "/\"dependencies\": {/a \
                      \"language-patch2\": \"${_language_patch2_url}\"," \
-         -e "s/\"language-shellscript\": \".*\",/\"language-unix-shell\": \"${_language_unix_shell_ver}\",\n    \"language-vala-modern\": \"${_language_vala_modern_ver}\",\n    \"language-archlinux\": \"${_language_archlinux_ver}\",\n    \"terminal-fusion\": \"${_terminal_fusion_ver}\",\n    \"tool-bar\": \"${_tool_bar_ver}\",\n    \"toolbar-fusion\": \"${_toolbar_fusion_ver}\",\n    \"linter-clang\": \"${_linter_clang_ver}\",\n    \"linter-coffeescript\": \"${_linter_coffeescript_ver}\",\n    \"linter-jsonlint\": \"${_linter_jsonlint_ver}\",\n    \"linter-pylint\": \"${_linter_pylint_ver}\",/g" \
+         -e "s/\"language-shellscript\": \".*\",/\"language-unix-shell\": \"${_language_unix_shell_ver}\",\n    \"language-vala-modern\": \"${_language_vala_modern_ver}\",\n    \"terminal-fusion\": \"${_terminal_fusion_ver}\",\n    \"tool-bar\": \"${_tool_bar_ver}\",\n    \"toolbar-fusion\": \"${_toolbar_fusion_ver}\",\n    \"linter-clang\": \"${_linter_clang_ver}\",\n    \"linter-coffeescript\": \"${_linter_coffeescript_ver}\",\n    \"linter-jsonlint\": \"${_linter_jsonlint_ver}\",\n    \"linter-pylint\": \"${_linter_pylint_ver}\",/g" \
          -e "s/\"about\": \".*\"/\"about-arch\": \"${_about_arch_ver}\"/g" \
          -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",/g" \
          -e "/\"packageDependencies\": {/a \
-              \"ask-stack\": \"${_ask_stack_ver}\",\n    \"autocomplete-clang\": \"${_autocomplete_clang_ver}\",\n    \"autocomplete-java\": \"${_autocomplete_java_ver}\",\n    \"autocomplete-modules\": \"${_autocomplete_modules_ver}\",\n    \"autocomplete-python\": \"${_autocomplete_python_ver}\",\n    \"autocomplete-sass\": \"${_autocomplete_sass_ver}\",\n    \"dark-bint-syntax\": \"${_dark_bint_syntax_ver}\",\n    \"file-icons\": \"${_file_icons_ver}\",\n    \"fusion-ui\": \"${_fusion_ui_ver}\",\n    \"gpp-compiler\": \"${_gpp_compiler_ver}\",\n    \"git-plus\": \"${_git_plus_ver}\",\n    \"git-time-machine\": \"${_git_time_machine_ver}\"," package.json
+              \"ask-stack\": \"${_ask_stack_ver}\",\n    \"autocomplete-clang\": \"${_autocomplete_clang_ver}\",\n    \"autocomplete-java\": \"${_autocomplete_java_ver}\",\n    \"autocomplete-modules\": \"${_autocomplete_modules_ver}\",\n    \"autocomplete-python\": \"${_autocomplete_python_ver}\",\n    \"dark-bint-syntax\": \"${_dark_bint_syntax_ver}\",\n    \"file-icons\": \"${_file_icons_ver}\",\n    \"fusion-ui\": \"${_fusion_ui_ver}\",\n    \"gpp-compiler\": \"${_gpp_compiler_ver}\",\n    \"git-plus\": \"${_git_plus_ver}\",\n    \"git-time-machine\": \"${_git_time_machine_ver}\"," package.json
 
   for i in ${_L[@]}
   do
@@ -381,6 +382,9 @@ function prepare {
 
   mkdir -p $srcdir/atom/node_modules
   cd $srcdir/atom/node_modules
+  if ! [[ -n ${_about_arch_ver} ]]; then
+    _about_arch_ver=1.6.2
+  fi
   wget -cqO- https://github.com/fusion809/about/archive/v${_about_arch_ver}.tar.gz | tar xz --transform="s/about-${_about_arch_ver}/about-arch/"
   cd about-arch
   patch -Np1 -i $GHUBM/atom-custom/about-arch.patch
