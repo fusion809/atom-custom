@@ -353,6 +353,7 @@ function pkgver {
 
 function prepare {
   gitsources
+  pkgver
   cd $srcdir/atom
   git checkout v${_atomver}
   sed -i -e "/exception-reporting/d" \
