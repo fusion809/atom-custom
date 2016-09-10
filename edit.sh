@@ -400,10 +400,10 @@ function prepare {
   cd autocomplete-clang
   sed -i -e 's/.coffee//g' lib/*.coffee
   cd ..
-  mkdir -p linter
-  cp -r $srcdir/linter/* linter
-  cd linter
-  sed -i -e 's/.coffee//g' lib/*.coffee
+  mkdir -p git-plus
+  cp -r $srcdir/git-plus/* git-plus
+  cd git-plus
+  sed -i -e 's/.coffee//g' lib/*.coffee lib/*/*.coffee
   cd ..
   cd $srcdir/atom
 
