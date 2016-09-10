@@ -393,7 +393,7 @@ function prepare {
   mkdir -p script
   cp -r $srcdir/script/* script
   cd script
-  sed -i -e 's/.coffee//g' lib/*.coffee
+  sed -i -e 's/\.coffee//g' lib/*.coffee
   cd ..
   mkdir -p autocomplete-clang
   cp -r $srcdir/autocomplete-clang/* autocomplete-clang
