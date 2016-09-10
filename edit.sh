@@ -385,9 +385,26 @@ function prepare {
   if ! [[ -n ${_about_arch_ver} ]]; then
     _about_arch_ver=1.6.2
   fi
-  wget -cqO- https://github.com/fusion809/about/archive/v${_about_arch_ver}.tar.gz | tar xz --transform="s/about-${_about_arch_ver}/about-arch/"
+  mkdir -p about-arch
+  cp -r $srcdir/about-arch/* about-arch
   cd about-arch
   patch -Np1 -i $GHUBM/atom-custom/about-arch.patch
+  cd ../
+  mkdir -p script
+  cp -r $srcdir/script/* script
+  cd script
+  sed -i -e 's/.coffee//g' lib/*.coffee
+  cd ..
+  mkdir -p autocomplete-clang
+  cp -r $srcdir/autocomplete-clang/* autocomplete-clang
+  cd autocomplete-clang
+  sed -i -e 's/.coffee//g' lib/*.coffee
+  cd ..
+  mkdir -p linter
+  cp -r $srcdir/linter/* linter
+  cd linter
+  sed -i -e 's/.coffee//g' lib/*.coffee
+  cd ..
   cd $srcdir/atom
 
   sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
