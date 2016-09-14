@@ -363,7 +363,7 @@ function prepare {
          -e "/-theme/d" \
          -e "s/\"language-gfm\": \".*\",/\"language-gfm2\": \"${_language_gfm2_ver}\",\n    \"language-ini-desktop\": \"${_language_ini_desktop_ver}\",\n    \"language-liquid\": \"${_language_liquid_ver}\",\n    \"language-patch2\": \"${_language_patch2_ver}\",/g" \
          -e "/\"dependencies\": {/a \
-                     \"language-patch2\": \"${_language_patch2_url}\"," \
+                     \"language-patch2\": \"${_language_patch2_url}\",\n    \"atom-ui\": \"0.4.1\"," \
          -e "s/\"language-shellscript\": \".*\",/\"language-unix-shell\": \"${_language_unix_shell_ver}\",\n    \"language-vala-modern\": \"${_language_vala_modern_ver}\",\n    \"terminal-fusion\": \"${_terminal_fusion_ver}\",\n    \"tool-bar\": \"${_tool_bar_ver}\",\n    \"toolbar-fusion\": \"${_toolbar_fusion_ver}\",\n    \"linter-clang\": \"${_linter_clang_ver}\",\n    \"linter-coffeescript\": \"${_linter_coffeescript_ver}\",\n    \"linter-jsonlint\": \"${_linter_jsonlint_ver}\",\n    \"linter-pylint\": \"${_linter_pylint_ver}\",/g" \
          -e "s/\"about\": \".*\"/\"about-arch\": \"${_about_arch_ver}\"/g" \
          -e "s/\"link\": \".*\",/\"hyperclick\": \"${_hyperclick_ver}\",\n    \"hyperlink-hyperclick\": \"${_hyperlink_hyperclick_ver}\",\n    \"minimap\": \"${_minimap_ver}\",\n    \"pigments\": \"${_pigments_ver}\",/g" \
@@ -393,17 +393,17 @@ function prepare {
   mkdir -p script
   cp -r $srcdir/script/* script
   cd script
-  sed -i -e 's/.coffee//g' lib/*.coffee
+  sed -i -e 's/\.coffee//g' lib/*.coffee
   cd ..
   mkdir -p autocomplete-clang
   cp -r $srcdir/autocomplete-clang/* autocomplete-clang
   cd autocomplete-clang
-  sed -i -e 's/.coffee//g' lib/*.coffee
+  sed -i -e 's/\.coffee//g' lib/*.coffee
   cd ..
   mkdir -p git-plus
   cp -r $srcdir/git-plus/* git-plus
   cd git-plus
-  sed -i -e 's/.coffee//g' lib/*.coffee lib/*/*.coffee
+  sed -i -e 's/\.coffee//g' lib/*.coffee lib/*/*.coffee
   cd ..
   cd $srcdir/atom
 
