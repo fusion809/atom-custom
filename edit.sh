@@ -394,16 +394,25 @@ function prepare {
   cp -r $srcdir/script/* script
   cd script
   sed -i -e 's/\.coffee//g' lib/*.coffee
+  sed -i -e "/\"version\": \".*\",/a \
+              \"readmeFilename\": \"README.md\",\n    \"readme\": \"Run scripts without a terminal.\"," \
+         -e "s/\"readmeFilename\"/    \"readmeFilename\"/g" package.json
   cd ..
   mkdir -p autocomplete-clang
   cp -r $srcdir/autocomplete-clang/* autocomplete-clang
   cd autocomplete-clang
   sed -i -e 's/\.coffee//g' lib/*.coffee
+  sed -i -e "/\"version\": \".*\",/a \
+              \"readmeFilename\": \"README.md\",\n    \"readme\": \"C/C++/Objective-C intellisense.\"," \
+         -e "s/\"readmeFilename\"/    \"readmeFilename\"/g" package.json
   cd ..
   mkdir -p git-plus
   cp -r $srcdir/git-plus/* git-plus
   cd git-plus
   sed -i -e 's/\.coffee//g' lib/*.coffee lib/*/*.coffee
+  sed -i -e "/\"version\": \".*\",/a \
+              \"readmeFilename\": \"README.md\",\n    \"readme\": \"Run git commands without a terminal.\"," \
+         -e "s/\"readmeFilename\"/    \"readmeFilename\"/g" package.json
   cd ..
   cd $srcdir/atom
 
