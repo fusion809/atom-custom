@@ -418,6 +418,14 @@ function prepare {
               \"readmeFilename\": \"README.md\",\n    \"readme\": \"C/C++/Objective-C intellisense.\"," \
          -e "s/\"readmeFilename\"/    \"readmeFilename\"/g" package.json
   cd ..
+  mkdir -p linter
+  cp -r $srcdir/linter/* linter
+  cd linter
+  sed -i -e 's/\.coffee//g' lib/*.coffee
+  sed -i -e "/\"version\": \".*\",/a \
+              \"readmeFilename\": \"README.md\",\n    \"readme\": \"The base linter package.\"," \
+         -e "s/\"readmeFilename\"/    \"readmeFilename\"/g" package.json
+  cd ..
   mkdir -p git-plus
   cp -r $srcdir/git-plus/* git-plus
   cd git-plus
