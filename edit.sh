@@ -1,4 +1,6 @@
 #!/bin/zsh
+set -u
+
 _atom_url='https://github.com/atom'
 _fus_url='https://github.com/fusion809'
 _lee_url='https://github.com/lee-dohm'
@@ -438,13 +440,11 @@ function prepare {
   sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
   ./script/build || die "Fail fixing verbosity of script/build"
   sed -e "s/<%= version %>/$pkgver/g" $GHUBM/atom-custom/control.in > $srcdir/atom/resources/linux/debian/control.in
-  exit
 }
 
 function build {
   cd $srcdir/atom
   script/build
-  exit
 }
 
 function installatom {
@@ -452,9 +452,6 @@ function installatom {
   script/grunt mkdeb
   sudo dpkg -i out/atom-${_atomver}-amd64.deb
   cp out/atom-${_atomver}-amd64.deb $GHUBM/atom-custom/atom-bleeding-${pkgver}-amd64.deb
-  cd $GHUBM/atom-custom
-  gothub upload -t v${_atomver} -n *.deb -f *.deb
-  exit
 }
 
 prepare
