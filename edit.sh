@@ -330,7 +330,7 @@ function describe {
 
 function pkgver {
   _ask_stack_ver="$(describe ask-stack)"
-  _atomver="$(describe atom)"
+  _atomver=1.11.1
   _about_arch_ver="$(describe about-arch)"
   _autocomplete_clang_ver="$(describe autocomplete-clang)"
   _autocomplete_java_ver="$(describe autocomplete-java)"
