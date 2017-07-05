@@ -20,6 +20,4 @@ index 340b1e5..51b1aa0 100644
            @a href: 'https://github.com/atom/atom/contributors', 'Atom Community'
 -          @span class: 'inline', ' and packaged for Arch Linux by '
 +          @span class: 'inline', ' and packaged for Ubuntu by '
-           @a class: 'inline', href: 'https://fusion809.github.io', 'Brenton Horne'
-           @span class: 'inline', ' <'
-           @a class: 'inline', href: 'mailto:brentonhorne77@gmail.com', 'brentonhorne77@gmail.com'
+           @a class: 'inline', href: 'https://fusion809.github.io', 'fusion809'
